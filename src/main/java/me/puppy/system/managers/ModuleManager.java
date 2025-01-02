@@ -2,10 +2,10 @@ package me.puppy.system.managers;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import me.puppy.Winterpuppy;
 import me.puppy.client.modules.Category;
 import me.puppy.client.modules.Feature;
 import me.puppy.client.modules.Module;
+import me.puppy.client.modules.client.ClickGui;
 import me.puppy.client.modules.movement.Sprint;
 import me.puppy.system.utils.Jsonable;
 import me.puppy.system.utils.Util;
@@ -24,6 +24,7 @@ public class ModuleManager implements Jsonable, Util {
     public void init() {
 
         //Client
+        modules.add(new ClickGui());
 
         //Movement
         modules.add(new Sprint());

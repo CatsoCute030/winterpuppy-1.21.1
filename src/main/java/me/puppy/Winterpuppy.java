@@ -1,5 +1,6 @@
 package me.puppy;
 
+import me.puppy.system.managers.ColorManager;
 import me.puppy.system.managers.CommandManager;
 import me.puppy.system.managers.ConfigManager;
 import me.puppy.system.managers.ModuleManager;
@@ -23,19 +24,30 @@ public class Winterpuppy implements ModInitializer {
 	public static ModuleManager moduleManager;
 	public static ConfigManager configManager;
 	public static CommandManager commandManager;
+	public static ColorManager colorManager;
 
 	@Override
 	public void onInitialize() {
-		load();
 		LOGGER.info("I LIKE WINTER!　" + MOD_NAME + VERSION);
+		Events = new EventBus();
+		LOGGER.info("1!　" + MOD_NAME + VERSION);
+		Events.registerLambdaFactory("me.puppy", (lookupInMethod, klass) -> (MethodHandles.Lookup) lookupInMethod.invoke(null, klass, MethodHandles.lookup()));
+		LOGGER.info("2!　" + MOD_NAME + VERSION);
+		Events.subscribe(this);
+		LOGGER.info("3!　" + MOD_NAME + VERSION);
+		moduleManager = new ModuleManager();
+		LOGGER.info("4!　" + MOD_NAME + VERSION);
+		configManager = new ConfigManager();
+		LOGGER.info("5!　" + MOD_NAME + VERSION);
+		commandManager = new CommandManager();
+		LOGGER.info("6!　" + MOD_NAME + VERSION);
+		colorManager = new ColorManager();
+		LOGGER.info("7!　" + MOD_NAME + VERSION);
 	}
 
 	public void load() {
 		Events = new EventBus();
 		Events.registerLambdaFactory("me.puppy", (lookupInMethod, klass) -> (MethodHandles.Lookup) lookupInMethod.invoke(null, klass, MethodHandles.lookup()));
 		Events.subscribe(this);
-		moduleManager = new ModuleManager();
-		configManager = new ConfigManager();
-		commandManager = new CommandManager();
 	}
 }

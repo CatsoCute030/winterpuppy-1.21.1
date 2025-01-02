@@ -1,5 +1,7 @@
 package me.puppy.system.utils;
 
+import me.puppy.client.modules.client.ClickGui;
+
 import java.awt.*;
 
 public class ColorUtil {
@@ -17,6 +19,11 @@ public class ColorUtil {
 
     public static int toRGBA(float r, float g, float b, float a) {
         return ColorUtil.toRGBA((int) (r * 255.0f), (int) (g * 255.0f), (int) (b * 255.0f), (int) (a * 255.0f));
+    }
+
+    public static Color rainbow(int delay) {
+        double rainbowState = Math.ceil((double) (System.currentTimeMillis() + (long) delay) / 20.0);
+        return Color.getHSBColor((float) ((rainbowState %= 360.0) / 360.0), ClickGui.getInstance().rainbowSaturation.getValue().floatValue() / 255.0f, ClickGui.getInstance().rainbowBrightness.getValue().floatValue() / 255.0f);
     }
 
     public static int toRGBA(float[] colors) {

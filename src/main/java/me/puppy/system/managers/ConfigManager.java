@@ -17,8 +17,8 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ConfigManager {
-    private static final Path PATH = FabricLoader.getInstance().getGameDir().resolve("winterPuppy");
-    public static final Path musicPath = FabricLoader.getInstance().getGameDir().resolve("winterPuppy/songs");
+    private static final Path OYVEY_PATH = FabricLoader.getInstance().getGameDir().resolve("winter");
+    public static final Path musicPath = FabricLoader.getInstance().getGameDir().resolve("winter/songs");
     private static final Gson gson = new GsonBuilder()
             .setLenient()
             .setPrettyPrinting()
@@ -63,11 +63,11 @@ public class ConfigManager {
     }
 
     public void load() {
-        if (!PATH.toFile().exists()) PATH.toFile().mkdirs();
+        if (!OYVEY_PATH.toFile().exists()) OYVEY_PATH.toFile().mkdirs();
         if (!musicPath.toFile().exists()) musicPath.toFile().mkdirs();
         for (Jsonable jsonable : jsonables) {
             try {
-                String read = Files.readString(PATH.resolve(jsonable.getFileName()));
+                String read = Files.readString(OYVEY_PATH.resolve(jsonable.getFileName()));
                 jsonable.fromJson(JsonParser.parseString(read));
             } catch (Throwable e) {
                 e.printStackTrace();
@@ -76,12 +76,12 @@ public class ConfigManager {
     }
 
     public void save() {
-        if (!PATH.toFile().exists()) PATH.toFile().mkdirs();
+        if (!OYVEY_PATH.toFile().exists()) OYVEY_PATH.toFile().mkdirs();
         if (!musicPath.toFile().exists()) musicPath.toFile().mkdirs();
         for (Jsonable jsonable : jsonables) {
             try {
                 JsonElement json = jsonable.toJson();
-                Files.writeString(PATH.resolve(jsonable.getFileName()), gson.toJson(json));
+                Files.writeString(OYVEY_PATH.resolve(jsonable.getFileName()), gson.toJson(json));
             } catch (Throwable e) {
             }
         }
